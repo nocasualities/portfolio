@@ -1,0 +1,1016 @@
+<html lang="ru"><head><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>casual</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Crect%20width%3D'100'%20height%3D'100'%20rx%3D'24'%20fill%3D'%230a0a0a'%2F%3E%3Cpath%20d%3D'M10%2050%20C28%2026%2072%2026%2090%2050%20C72%2074%2028%2074%2010%2050%20Z'%20fill%3D'%23f5f5f5'%2F%3E%3Cg%20transform%3D'translate(50%2050)'%3E%3Cpath%20fill%3D'%23111'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(36)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(72)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(108)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(144)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(180)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(216)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(252)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(288)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(324)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Ccircle%20r%3D'13'%20fill%3D'%23111'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Shadows+Into+Light&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --text: #f4f4f4;
+      --soft-text: rgba(255, 255, 255, 0.86);
+      --line: rgba(255, 255, 255, 0.55);
+      --link: rgba(255, 255, 255, 0.34);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, #111217 0%, #07080b 34%, #020202 68%, #000000 100%);
+      color: var(--text);
+      font-family: 'Bahnschrift', 'Inter', sans-serif;
+      user-select: none;
+      cursor: none;
+    }
+
+    body {
+      position: relative;
+      animation: screenFlicker 8s infinite;
+    }
+
+    @keyframes screenFlicker {
+      0%, 100% { filter: brightness(1) contrast(1); }
+      48% { filter: brightness(1) contrast(1); }
+      49% { filter: brightness(0.992) contrast(1.01); }
+      50% { filter: brightness(1.006) contrast(1.02); }
+      51% { filter: brightness(0.996) contrast(1.01); }
+      52% { filter: brightness(1) contrast(1); }
+    }
+
+    .bg-blur-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-blur {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(130px);
+      opacity: 0.12;
+      mix-blend-mode: screen;
+    }
+
+    .blur-1 {
+      width: 360px;
+      height: 360px;
+      top: 6%;
+      left: 8%;
+      background: rgba(95, 110, 190, 0.14);
+      animation: blurFloat1 18s ease-in-out infinite alternate;
+    }
+
+    .blur-2 {
+      width: 420px;
+      height: 420px;
+      right: 8%;
+      bottom: 8%;
+      background: rgba(110, 26, 40, 0.14);
+      animation: blurFloat2 23s ease-in-out infinite alternate;
+    }
+
+    .blur-3 {
+      width: 260px;
+      height: 260px;
+      left: 42%;
+      top: 68%;
+      background: rgba(210, 210, 230, 0.05);
+      animation: blurFloat3 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes blurFloat1 {
+      from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.1; }
+      to   { transform: translate3d(55px, -28px, 0) scale(1.05); opacity: 0.13; }
+    }
+
+    @keyframes blurFloat2 {
+      from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.1; }
+      to   { transform: translate3d(-65px, 34px, 0) scale(0.96); opacity: 0.14; }
+    }
+
+    @keyframes blurFloat3 {
+      from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.04; }
+      to   { transform: translate3d(20px, -36px, 0) scale(1.08); opacity: 0.07; }
+    }
+
+    .ghost-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ghost {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.03);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      filter: blur(1.5px);
+      white-space: nowrap;
+      text-shadow: 0 0 12px rgba(255,255,255,0.02);
+    }
+
+    .ghost-1 {
+      top: 10%;
+      left: 7%;
+      font-size: clamp(2rem, 4vw, 4rem);
+      animation: ghostFloat1 16s ease-in-out infinite alternate;
+    }
+
+    .ghost-2 {
+      right: 8%;
+      bottom: 20%;
+      font-size: clamp(1rem, 2vw, 1.7rem);
+      animation: ghostFloat2 20s ease-in-out infinite alternate;
+    }
+
+    .ghost-3 {
+      left: 61%;
+      top: 54%;
+      font-size: clamp(1.1rem, 2.4vw, 2rem);
+      animation: ghostFloat3 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes ghostFloat1 {
+      from { transform: translate3d(0, 0, 0); opacity: 0.02; }
+      to   { transform: translate3d(18px, -10px, 0); opacity: 0.04; }
+    }
+
+    @keyframes ghostFloat2 {
+      from { transform: translate3d(0, 0, 0); opacity: 0.018; }
+      to   { transform: translate3d(-14px, 11px, 0); opacity: 0.034; }
+    }
+
+    @keyframes ghostFloat3 {
+      from { transform: translate3d(0, 0, 0); opacity: 0.02; }
+      to   { transform: translate3d(12px, -15px, 0); opacity: 0.036; }
+    }
+
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+
+    #eyes-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .noise {
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0.07;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.32) 0.6px, transparent 0.85px),
+        radial-gradient(rgba(255,255,255,0.11) 0.5px, transparent 0.75px);
+      background-size: 8px 8px, 11px 11px;
+      background-position: 0 0, 4px 5px;
+      mix-blend-mode: soft-light;
+      animation: noiseShift 0.22s steps(2) infinite;
+    }
+
+    @keyframes noiseShift {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-1%, 1%); }
+      50%  { transform: translate(1%, -1%); }
+      75%  { transform: translate(0.5%, 1%); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      opacity: 0.045;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.08) 0px,
+        rgba(255,255,255,0.08) 1px,
+        transparent 2px,
+        transparent 4px
+      );
+      mix-blend-mode: soft-light;
+    }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      background: radial-gradient(
+        circle at center,
+        transparent 30%,
+        rgba(0, 0, 0, 0.10) 58%,
+        rgba(0, 0, 0, 0.34) 100%
+      );
+    }
+
+    #cursor-dot {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      background: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    #cursor-ring {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition:
+        width 0.15s ease,
+        height 0.15s ease,
+        border-color 0.15s ease;
+      backdrop-filter: blur(1px);
+    }
+
+    #cursor-ring.pressed {
+      width: 24px;
+      height: 24px;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .content {
+      position: relative;
+      z-index: 7;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding: 24px;
+      padding-top: 150px;
+    }
+
+    .text-box {
+      position: relative;
+      width: 760px;
+      max-width: 92vw;
+      padding: 28px 24px;
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.3s ease-out;
+      will-change: transform;
+    }
+
+    .ascii-title-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: -6px;
+      min-height: 340px;
+      overflow: visible;
+    }
+
+    .ascii-title {
+      display: inline-block;
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 0.82em;
+      letter-spacing: 0;
+      white-space: pre;
+      text-align: left;
+      color: #eef2ff;
+      text-shadow:
+        0 0 12px rgba(220, 230, 255, 0.08),
+        0 0 28px rgba(220, 230, 255, 0.03);
+      opacity: 0.98;
+      filter: drop-shadow(0 0 8px rgba(220, 230, 255, 0.05));
+      user-select: none;
+      pointer-events: none;
+      overflow: visible;
+      transform: translateY(80px);
+    }
+
+    .handwritten {
+      display: inline-block;
+      margin: 0 2px;
+      font-family: 'Shadows Into Light', cursive;
+      font-size: 1.2em;
+      color: #ffffff;
+      transform: rotate(-3deg);
+      text-shadow: 0 0 10px rgba(255,255,255,0.08);
+    }
+
+    #quote {
+      margin-top: 0;
+      min-height: 1.2em;
+      font-size: 1.3rem;
+      font-style: italic;
+      letter-spacing: 0.01em;
+      opacity: 0.14;
+      text-shadow: 0 0 12px rgba(255,255,255,0.02);
+      transition: opacity 0.4s ease;
+    }
+
+    .footer-links {
+      position: fixed;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--link);
+      text-decoration: none;
+      font-size: 22px;
+      filter: blur(0.2px);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        text-shadow 0.3s ease,
+        color 0.3s ease,
+        filter 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: rgba(255,255,255,0.96);
+      transform: translateY(-3px) scale(1.03);
+      text-shadow: 0 0 18px rgba(255,255,255,0.35);
+      filter: blur(0);
+    }
+
+    .corrupt-text {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-left: 8px;
+      vertical-align: 2px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .corrupt-text.corrupting {
+      color: rgba(255,255,255,0.95);
+      animation: corruptFlicker 0.09s steps(2) infinite;
+    }
+
+    @keyframes corruptFlicker {
+      0%   { text-shadow: 0 0 6px rgba(255,0,40,0.8), -1px 0 0 rgba(255,255,255,0.6); }
+      50%  { text-shadow: 0 0 10px rgba(0,255,255,0.9), 1px 0 0 rgba(255,0,40,0.9); }
+      100% { text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,0,40,0.5); }
+    }
+
+    @media (max-width: 768px) {
+      html, body { cursor: auto; }
+      #cursor-dot { display: none; }
+      #cursor-ring { display: none; }
+
+      .content {
+        padding-top: 110px;
+      }
+
+      .text-box {
+        width: 92vw;
+        padding: 20px 14px;
+        transition: none;
+      }
+
+      .ascii-title-wrap {
+        min-height: 210px;
+        margin-bottom: 0;
+        overflow: visible;
+      }
+
+      .ascii-title {
+        font-size: 7px;
+        line-height: 0.84em;
+        overflow: visible;
+        transform: translateY(40px);
+      }
+
+      .desc {
+        font-size: 0.95rem;
+      }
+
+      .footer-links {
+        bottom: 22px;
+        gap: 20px;
+      }
+
+      .noise { opacity: 0.045; }
+      .scanlines { opacity: 0.03; }
+      .ghost { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+  <div class="bg-blur-wrap">
+    <div class="bg-blur blur-1"></div>
+    <div class="bg-blur blur-2"></div>
+    <div class="bg-blur blur-3"></div>
+  </div>
+
+  <div class="ghost-layer">
+    <div class="ghost ghost-1">019</div>
+    <div class="ghost ghost-2">dream residue</div>
+    <div class="ghost ghost-3">fine</div>
+  </div>
+
+  <div id="particles-js"><canvas class="particles-js-canvas-el" width="800" height="1758" style="width: 100%; height: 100%;"></canvas></div>
+  <canvas id="eyes-canvas"></canvas>
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <div class="content">
+    <div id="float-box" class="text-box">
+      <div class="ascii-title-wrap">
+        <pre id="ascii-title" class="ascii-title">                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+      .&amp;@, ;@, 3&amp;&amp;. ,&amp;&amp;&amp;&amp;3,&amp;&amp;@@@,:@@@@, :@&amp;,        
+       :@2,@&amp;..&amp;9&amp;.   B&amp;.   ,@, .@@,    ,@&amp;&amp;.       
+       .B@i@, ,&amp;;&amp;A   B@,   ,@, ,@@i    #@#@,       
+        ,@&amp;&amp;. ,&amp;:&amp;&amp;.  B@,   :@,  :@@@S ,@G,&amp;,       
+        .B@,  B&amp;.M&amp;.  B@,   :@,    :@@;,@,,&amp;G       
+         3@, ,&amp;&amp;&amp;&amp;&amp;.  B@,   :@,     :@35&amp;&amp;&amp;&amp;&amp;.      
+         3@, ,&amp;. ,&amp;B:&amp;&amp;&amp;&amp;3  :@, :@@@@@:&amp;&amp;. 3&amp;.      
+                                 ,B@H.              
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+</pre>
+      </div>
+
+      <div id="quote" style="opacity: 0.14;">не бойся</div>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <a href="https://github.com/nocasualities" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+      <i class="fab fa-github"></i><span class="corrupt-text" data-busy="" data-restore="github">github</span>
+    </a>
+    <a href="https://discord.gg/Dyvu2nKAff" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+      <i class="fab fa-discord"></i><span class="corrupt-text" data-busy="" data-restore="discord">discord</span>
+    </a>
+    <a href="https://steamcommunity.com/id/nocasualities/" target="_blank" rel="noopener noreferrer" aria-label="Steam">
+      <i class="fab fa-steam"></i><span class="corrupt-text" data-busy="" data-restore="steam">steam</span>
+    </a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    const eyesCanvas = document.getElementById('eyes-canvas');
+    const eyesCtx = eyesCanvas.getContext('2d');
+    const eyes = [];
+
+    function initEyes() {
+      eyesCanvas.width = window.innerWidth;
+      eyesCanvas.height = window.innerHeight;
+      eyes.length = 0;
+      const count = isTouch ? 6 : 15;
+      const minDist = 100;
+      let attempts = 0;
+
+      function addEye() {
+        eyes.push({
+          x: Math.random() * eyesCanvas.width,
+          y: Math.random() * eyesCanvas.height,
+          cx: 0,
+          cy: 0,
+          size: 4.5 + Math.random() * 5,
+          depth: 0.012 + Math.random() * 0.05,
+          timer: Math.random() * 60,
+          nextBlink: 70 + Math.random() * 180
+        });
+      }
+
+      while (eyes.length < count && attempts < 800) {
+        attempts++;
+        const x = Math.random() * eyesCanvas.width;
+        const y = Math.random() * eyesCanvas.height;
+        let ok = true;
+        for (const e of eyes) {
+          if (Math.hypot(e.x - x, e.y - y) < minDist) {
+            ok = false;
+            break;
+          }
+        }
+        if (ok) {
+          eyes.push({
+            x: x,
+            y: y,
+            cx: 0,
+            cy: 0,
+            size: 4.5 + Math.random() * 5,
+            depth: 0.012 + Math.random() * 0.05,
+            timer: Math.random() * 60,
+            nextBlink: 70 + Math.random() * 180
+          });
+        }
+      }
+      while (eyes.length < count) addEye();
+    }
+
+    function drawEyes() {
+      eyesCtx.clearRect(0, 0, eyesCanvas.width, eyesCanvas.height);
+
+      const centerX = eyesCanvas.width / 2;
+      const centerY = eyesCanvas.height / 2;
+
+      for (const eye of eyes) {
+        const targetX = eye.x + (mouseX - centerX) * eye.depth;
+        const targetY = eye.y + (mouseY - centerY) * eye.depth;
+        eye.cx += (targetX - eye.cx) * 0.08;
+        eye.cy += (targetY - eye.cy) * 0.08;
+
+        const dx = mouseX - eye.cx;
+        const dy = mouseY - eye.cy;
+        const dist = Math.hypot(dx, dy);
+        const angle = Math.atan2(dy, dx);
+        const maxOffset = dist > 0 ? Math.min(eye.size * 0.4, 0.08 * dist) : 0;
+        const px = Math.cos(angle) * maxOffset;
+        const py = Math.sin(angle) * maxOffset;
+
+        eye.timer++;
+        let blink = 1;
+        if (eye.timer > eye.nextBlink) {
+          const t = eye.timer - eye.nextBlink;
+          if (t < 12) {
+            blink = Math.abs((t / 12) * 2 - 1);
+          } else {
+            eye.timer = 0;
+            eye.nextBlink = 90 + Math.random() * 220;
+          }
+        }
+
+        eyesCtx.beginPath();
+        eyesCtx.ellipse(eye.cx, eye.cy, eye.size + 2, (eye.size + 2) * 0.55 * blink, 0, 0, Math.PI * 2);
+        eyesCtx.fillStyle = 'rgba(255, 255, 255, 0.28)';
+        eyesCtx.fill();
+
+        eyesCtx.beginPath();
+        eyesCtx.arc(eye.cx + px, eye.cy + py, eye.size * 0.42 * blink, 0, Math.PI * 2);
+        eyesCtx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+        eyesCtx.fill();
+      }
+
+      requestAnimationFrame(drawEyes);
+    }
+
+    initEyes();
+    drawEyes();
+
+    window.addEventListener('resize', initEyes);
+
+    document.addEventListener('keydown', function (e) {
+      const key = e.key ? e.key.toLowerCase() : '';
+      if (
+        (e.ctrlKey && key === 's') ||
+        (e.ctrlKey && key === 'u')
+      ) {
+        e.preventDefault();
+      }
+    });
+
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorRing = document.getElementById('cursor-ring');
+
+    if (!isTouch) {
+      let ringX = window.innerWidth / 2;
+      let ringY = window.innerHeight / 2;
+
+      document.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = e.clientX + 'px';
+        cursorDot.style.top = e.clientY + 'px';
+      });
+
+      document.addEventListener('mousedown', () => cursorRing.classList.add('pressed'));
+      document.addEventListener('mouseup', () => cursorRing.classList.remove('pressed'));
+
+      function cursorLoop() {
+        let targetX = parseFloat(cursorDot.style.left) || window.innerWidth / 2;
+        let targetY = parseFloat(cursorDot.style.top) || window.innerHeight / 2;
+
+        ringX += (targetX - ringX) * 0.35;
+        ringY += (targetY - ringY) * 0.35;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+
+        requestAnimationFrame(cursorLoop);
+      }
+
+      cursorLoop();
+    }
+
+    const quotes = [
+      'ты никому не нужен... да и я тоже.',
+      timeQuote,
+      'почему ты всё ещё это читаешь?',
+      nameQuote
+    ];
+
+    const sessionStart = Date.now();
+
+    function fmtTime(sec) {
+      const s = Math.floor(sec);
+      const h = Math.floor(s / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const ss = s % 60;
+      const pad = (n) => (n < 10 ? '0' + n : '' + n);
+      return h > 0 ? h + ':' + pad(m) + ':' + pad(ss) : m + ':' + pad(ss);
+    }
+
+    function timeQuote() {
+      return 'ты тут сидел уже ' + fmtTime((Date.now() - sessionStart) / 1000);
+    }
+
+    function nameQuote() {
+      return 'привет, незнакомец. как твой день прошел?';
+    }
+
+    const quoteEl = document.getElementById('quote');
+
+    const lastQuotes = [];
+    const charset = '!@#%&*?$';
+    let quoteTimer = null;
+
+    function pickQuote() {
+      let index;
+      do {
+        index = Math.floor(Math.random() * quotes.length);
+      } while (lastQuotes.includes(index) && lastQuotes.length < quotes.length);
+      lastQuotes.push(index);
+      if (lastQuotes.length > 2) lastQuotes.shift();
+      return quotes[index];
+    }
+
+    const randSymbol = () => charset[Math.floor(Math.random() * charset.length)];
+
+    function animateTextCycle(getText, setText, target, onDone) {
+      const disp = getText().split('');
+      const targetLen = target.length;
+
+      const canScramble = (i) => (i < disp.length && disp[i] !== ' ');
+
+      let timer;
+      let phase = 'noise';
+      let tick = 0;
+      let states = [];
+
+      function randomizePos() {
+        const choices = [];
+        for (let i = 0; i < disp.length; i++) if (canScramble(i)) choices.push(i);
+        if (choices.length) disp[choices[Math.floor(Math.random() * choices.length)]] = randSymbol();
+      }
+
+      phase = 'noise';
+      tick = 0;
+      timer = setInterval(() => {
+        if (phase === 'noise') {
+          randomizePos();
+          randomizePos();
+          tick++;
+          if (tick >= disp.length) {
+            phase = 'fit';
+            tick = 0;
+          }
+        } else if (phase === 'fit') {
+          while (disp.length < targetLen) disp.push(randSymbol());
+          while (disp.length > targetLen) disp.pop();
+          randomizePos();
+          tick++;
+          if (tick >= Math.max(3, Math.abs(targetLen - disp.length)) + 1) {
+            phase = 'settle';
+            states = [];
+            for (let i = 0; i < targetLen; i++) {
+              if (target[i] === ' ') {
+                disp[i] = ' ';
+                states.push({ flips: 0, done: true });
+              } else {
+                states.push({ flips: 2 + Math.floor(Math.random() * 4), done: false });
+              }
+            }
+            tick = 0;
+          }
+        } else {
+          const pending = [];
+          for (let i = 0; i < states.length; i++) if (!states[i].done) pending.push(i);
+          if (pending.length) {
+            const idx = pending[Math.floor(Math.random() * pending.length)];
+            const st = states[idx];
+            if (st.flips > 0) {
+              st.flips--;
+              disp[idx] = randSymbol();
+            } else {
+              st.done = true;
+              disp[idx] = target[idx];
+            }
+          } else {
+            clearInterval(timer);
+            setText(target);
+            if (onDone) onDone();
+            return;
+          }
+        }
+        setText(disp.join(''));
+      }, 13);
+
+      return timer;
+    }
+
+    quoteEl.innerText = (function getQuoteText(q) {
+      return typeof q === 'function' ? q() : q;
+    })(pickQuote());
+
+    let quoteTimeout = null;
+
+    function startQuoteCycle() {
+      if (quoteTimer) clearInterval(quoteTimer);
+      const next = pickQuote();
+      const target = typeof next === 'function' ? next() : next;
+      quoteTimer = animateTextCycle(
+        () => quoteEl.innerText,
+        (s) => { quoteEl.innerText = s; },
+        target,
+        () => { quoteTimeout = setTimeout(startQuoteCycle, 2000); }
+      );
+    }
+
+    setTimeout(startQuoteCycle, 2000);
+
+    const tabTitles = ['КТО ТЫ??', 'Я СХОЖУ С УМАААА', 'АААаааАаа', 'AARGH FUUUUUCK..'];
+    let titleIndex = 0;
+    let titleTimer = null;
+    let titleTimeout = null;
+
+    function nextTitle() {
+      if (titleTimer) clearInterval(titleTimer);
+      const next = tabTitles[titleIndex];
+      titleIndex = (titleIndex + 1) % tabTitles.length;
+      titleTimer = animateTextCycle(
+        () => document.title,
+        (s) => { document.title = s; },
+        next,
+        () => { titleTimeout = setTimeout(nextTitle, 2000); }
+      );
+    }
+
+    setTimeout(nextTitle, 2500);
+
+    // ---------- link corruption on hover ----------
+    document.querySelectorAll('.corrupt-text').forEach((el) => {
+      const link = el.closest('a');
+      let ghTimer = null;
+
+      link.addEventListener('mouseenter', () => {
+        if (el.dataset.busy === '1') return;
+        el.dataset.busy = '1';
+        el.classList.add('corrupting');
+        ghTimer = animateTextCycle(
+          () => el.textContent,
+          (s) => { el.textContent = s; },
+          el.dataset.restore || 'github',
+          () => {
+            el.dataset.busy = '';
+            el.classList.remove('corrupting');
+          }
+        );
+      });
+
+      link.addEventListener('mouseleave', () => {
+        if (!el.dataset.busy) return;
+        if (ghTimer) clearInterval(ghTimer);
+        ghTimer = null;
+        el.dataset.busy = '';
+        el.classList.remove('corrupting');
+        el.textContent = el.dataset.restore || 'github';
+      });
+    });
+
+    const faviconLink = document.querySelector('link[rel="icon"]');
+
+    function faviconSVG(scale) {
+      return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='#0a0a0a'/><g transform='translate(50 50) scale(1 " + scale + ") translate(-50 -50)'><path d='M10 50 C28 26 72 26 90 50 C72 74 28 74 10 50 Z' fill='#f5f5f5'/><g transform='translate(50 50)'><path fill='#111' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(36)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(72)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(108)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(144)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(180)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(216)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(252)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(288)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><path fill='#111' transform='rotate(324)' d='M0 -23 L-3.5 -13 L3.5 -13 Z'/><circle r='13' fill='#111'/></g></g></svg>";
+    }
+
+    function setFavicon(scale) {
+      faviconLink.setAttribute('href', 'data:image/svg+xml,' + encodeURIComponent(faviconSVG(scale)));
+    }
+
+    let favTimer = null;
+
+    function blinkFavicon() {
+      const frames = [1, 0.3, 0.07, 0.3, 1];
+      let i = 0;
+      if (favTimer) clearInterval(favTimer);
+      favTimer = setInterval(() => {
+        setFavicon(frames[i]);
+        i++;
+        if (i >= frames.length) {
+          clearInterval(favTimer);
+          favTimer = null;
+          setFavicon(1);
+        }
+      }, 40);
+    }
+
+    setFavicon(1);
+    setTimeout(() => setInterval(blinkFavicon, 2000), 2000);
+
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 48,
+          density: {
+            enable: true,
+            value_area: 900
+          }
+        },
+        color: {
+          value: ['#d9d9d9', '#bdbdc7', '#ffffff']
+        },
+        shape: {
+          type: 'circle'
+        },
+        opacity: {
+          value: 0.18,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 0.25,
+            opacity_min: 0.05,
+            sync: false
+          }
+        },
+        size: {
+          value: 2.2,
+          random: true
+        },
+        line_linked: {
+          enable: false
+        },
+        move: {
+          enable: true,
+          speed: 0.55,
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: false },
+          onclick: { enable: false },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+
+    const box = document.getElementById('float-box');
+
+    if (!isTouch) {
+      document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX - window.innerWidth / 2) / 45;
+        const y = (e.clientY - window.innerHeight / 2) / 55;
+        box.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      });
+    }
+
+    const asciiTitle = document.getElementById('ascii-title');
+    const asciiChars = ' .,:;irsXA253hMHGS#9B&@';
+    const asciiCanvas = document.createElement('canvas');
+    const asciiCtx = asciiCanvas.getContext('2d');
+
+    let asciiTime = 0;
+    let asciiMouseX = 0;
+    let asciiMouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      asciiMouseX = (e.clientX - window.innerWidth / 2) / window.innerWidth;
+      asciiMouseY = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+    });
+
+    function renderAsciiTitle() {
+      const isMobile = window.innerWidth < 768;
+
+      const renderWidth = isMobile ? 260 : 420;
+      const renderHeight = isMobile ? 90 : 140;
+
+      asciiCanvas.width = renderWidth;
+      asciiCanvas.height = renderHeight;
+
+      asciiCtx.clearRect(0, 0, renderWidth, renderHeight);
+      asciiCtx.fillStyle = 'black';
+      asciiCtx.fillRect(0, 0, renderWidth, renderHeight);
+
+      const driftX = Math.sin(asciiTime * 1.0) * 1.2 + asciiMouseX * 5;
+      const driftY = Math.cos(asciiTime * 0.8) * 1.1 + asciiMouseY * 3;
+
+      const fontSize = isMobile ? 58 : 92;
+
+      asciiCtx.save();
+      asciiCtx.translate(renderWidth / 2 + driftX, renderHeight / 2 + driftY);
+      asciiCtx.textAlign = 'center';
+      asciiCtx.textBaseline = 'middle';
+      asciiCtx.font = `bold ${fontSize}px monospace`;
+
+      asciiCtx.globalAlpha = 1;
+      asciiCtx.fillStyle = '#ffffff';
+      asciiCtx.fillText('CASUAL', 0, 0);
+
+      asciiCtx.globalAlpha = 0.14 + Math.sin(asciiTime * 1.7) * 0.02;
+      asciiCtx.fillStyle = '#cfd8ff';
+      asciiCtx.fillText('CASUAL', -4, 0);
+
+      asciiCtx.globalAlpha = 0.08 + Math.cos(asciiTime * 1.3) * 0.015;
+      asciiCtx.fillStyle = '#ffdede';
+      asciiCtx.fillText('CASUAL', 4, 0);
+
+      asciiCtx.restore();
+
+      const img = asciiCtx.getImageData(0, 0, renderWidth, renderHeight).data;
+
+      const stepX = isMobile ? 5 : 6;
+      const stepY = isMobile ? 5 : 6;
+
+      let output = '';
+
+      for (let y = 0; y < renderHeight; y += stepY) {
+        let row = '';
+
+        for (let x = 0; x < renderWidth; x += stepX) {
+          const i = (y * renderWidth + x) * 4;
+          const r = img[i];
+          const g = img[i + 1];
+          const b = img[i + 2];
+
+          const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+          const noise = (Math.sin(asciiTime * 1.8 + x * 0.04 + y * 0.03) + 1) * 0.02;
+          const value = Math.max(0, Math.min(1, brightness + noise));
+
+          const index = Math.floor(value * (asciiChars.length - 1));
+          row += asciiChars[index];
+        }
+
+        output += row + '\n';
+      }
+
+      asciiTitle.textContent = output;
+      asciiTime += 0.03;
+      requestAnimationFrame(renderAsciiTitle);
+    }
+
+    renderAsciiTitle();
+
+</script>
+
+
+</body></html>
