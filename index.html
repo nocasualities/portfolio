@@ -336,6 +336,51 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
       transition: opacity 0.4s ease;
     }
 
+    #bio {
+      margin-top: 14px;
+      font-size: 0.95rem;
+    }
+
+    #bio-toggle {
+      display: inline-block;
+      color: rgba(180,180,180,0.6);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+      cursor: pointer;
+      user-select: none;
+      text-shadow: 0 0 10px rgba(255,255,255,0.06);
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    #bio-toggle:hover {
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 0 12px rgba(255,255,255,0.3);
+    }
+
+    #bio-caret {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    #bio.open #bio-caret {
+      transform: rotate(90deg);
+    }
+
+    #bio-body {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      line-height: 1.7;
+      color: rgba(180, 180, 180, 0.45);
+      font-style: italic;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+
+    #bio.open #bio-body {
+      max-height: 260px;
+      opacity: 1;
+    }
+
     .footer-links {
       position: fixed;
       left: 50%;
@@ -478,6 +523,17 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
       </div>
 
       <div id="quote" style="opacity: 0.14;">не бойся</div>
+
+      <div id="bio">
+        <div id="bio-toggle"><span id="bio-caret">&gt;</span> bio</div>
+        <div id="bio-body">
+          привет, я casual. я люблю писать код и общаться с добрыми людьми.<br>
+          мне не сильно нравится, когда ко мне плохо относятся, у меня портится<br>
+          настроение от плохих слов в мою сторону. не знаю зачем это пишу, думаю просто<br>
+          может поделиться с кем-то, кто я. я хочу начать изучать кибербезопасность,<br>
+          писать аддоны и моды на игры, и в целом помогать людям.
+        </div>
+      </div>
     </div>
   </div>
 
@@ -862,6 +918,14 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 
     setFavicon(1);
     setTimeout(() => setInterval(blinkFavicon, 2000), 2000);
+
+    // ---------- bio toggle ----------
+    const bioToggle = document.getElementById('bio-toggle');
+    if (bioToggle) {
+      bioToggle.addEventListener('click', () => {
+        document.getElementById('bio').classList.toggle('open');
+      });
+    }
 
     // ---------- background music ----------
     const bgm = document.getElementById('bgm');
