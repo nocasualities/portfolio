@@ -3,7 +3,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>casual</title>
+  <title>НЕ БОйСяЯЯ..</title>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Crect%20width%3D'100'%20height%3D'100'%20rx%3D'24'%20fill%3D'%230a0a0a'%2F%3E%3Cpath%20d%3D'M10%2050%20C28%2026%2072%2026%2090%2050%20C72%2074%2028%2074%2010%2050%20Z'%20fill%3D'%23f5f5f5'%2F%3E%3Cg%20transform%3D'translate(50%2050)'%3E%3Cpath%20fill%3D'%23111'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(36)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(72)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(108)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(144)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(180)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(216)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(252)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(288)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Cpath%20fill%3D'%23111'%20transform%3D'rotate(324)'%20d%3D'M0%20-23%20L-3.5%20-13%20L3.5%20-13%20Z'%2F%3E%3Ccircle%20r%3D'13'%20fill%3D'%23111'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -841,18 +841,18 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
     setTimeout(startQuoteCycle, 2000);
 
     const tabTitles = ['КТО ТЫ??', 'Я СХОЖУ С УМАААА', 'АААаааАаа', 'AARGH FUUUUUCK..'];
-    let titleIndex = 0;
+    let titleIndex = Math.floor(Math.random() * tabTitles.length);
     let titleTimer = null;
     let titleTimeout = null;
+    document.title = 'НЕ БОйСяЯЯ..';
 
     function nextTitle() {
       if (titleTimer) clearInterval(titleTimer);
-      const next = tabTitles[titleIndex];
       titleIndex = (titleIndex + 1) % tabTitles.length;
       titleTimer = animateTextCycle(
         () => document.title,
         (s) => { document.title = s; },
-        next,
+        tabTitles[titleIndex],
         () => { titleTimeout = setTimeout(nextTitle, 2000); }
       );
     }
