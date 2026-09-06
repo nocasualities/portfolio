@@ -256,10 +256,21 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
       backdrop-filter: blur(1px);
     }
 
+    #cursor-ring.hover {
+      width: 66px;
+      height: 66px;
+      border-color: rgba(255, 255, 255, 0.35);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, transparent 70%);
+    }
+
     #cursor-ring.pressed {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    * {
+      cursor: none !important;
     }
 
     .content {
@@ -286,11 +297,9 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
     }
 
     .ascii-title-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: -6px;
-      min-height: 340px;
+      text-align: center;
+      margin-top: 120px;
+      margin-bottom: 24px;
       overflow: visible;
     }
 
@@ -312,7 +321,53 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
       user-select: none;
       pointer-events: none;
       overflow: visible;
-      transform: translateY(80px);
+      transform: translateY(0);
+    }
+
+    .ascii-title .ascii-row {
+      display: block;
+      white-space: pre;
+      opacity: 0;
+    }
+
+    .ascii-title .ascii-row.on {
+      opacity: 1;
+      animation: rowHit 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes rowHit {
+      0%   { transform: translateY(14px); filter: blur(10px) brightness(3); opacity: 0; }
+      25%  { transform: translateY(-3px); filter: blur(3px) brightness(2.2); opacity: 1; }
+      42%  { transform: translateY(0); filter: blur(0) brightness(1.6); text-shadow: 2px 0 rgba(255,60,60,0.9), -2px 0 rgba(0,220,255,0.9); }
+      65%  { transform: none; filter: brightness(1.25); }
+      100% { transform: none; filter: none; opacity: 1; text-shadow: none; }
+    }
+
+    .ascii-title.sync {
+      animation: titleSync 0.7s ease-out;
+    }
+
+    @keyframes titleSync {
+      0%   { transform: none; filter: none; opacity: 1; }
+      12%  { transform: translateY(-3px) scaleX(0.96); filter: brightness(1.8); opacity: 0.55; }
+      24%  { transform: translateY(2px) scaleX(1.03); filter: brightness(2.2); opacity: 0.85; }
+      36%  { transform: translateY(-1px) scaleX(0.98); filter: brightness(1.6); opacity: 0.7; }
+      50%  { transform: none; filter: brightness(1); opacity: 1; text-shadow: 3px 0 rgba(255,60,60,0.75), -3px 0 rgba(0,200,255,0.75); }
+      72%  { text-shadow: 2px 0 rgba(255,60,60,0.4), -2px 0 rgba(0,200,255,0.4); }
+      100% { transform: none; filter: none; opacity: 1; text-shadow: none; }
+    }
+
+    .intro-fade {
+      opacity: 0;
+      transform: translateY(6px);
+      filter: blur(4px);
+      transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
+    }
+
+    .intro-fade.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
     }
 
     .handwritten {
@@ -337,7 +392,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
     }
 
     #bio {
-      margin-top: 14px;
+      margin-top: 10px;
       font-size: 0.95rem;
     }
 
@@ -385,11 +440,18 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
       position: fixed;
       left: 50%;
       bottom: 30px;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(12px);
+      opacity: 0;
       z-index: 8;
       display: flex;
       align-items: center;
       gap: 24px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .footer-links.fade-in {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     .footer-links a {
@@ -433,10 +495,6 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
     }
 
     @media (max-width: 768px) {
-      html, body { cursor: auto; }
-      #cursor-dot { display: none; }
-      #cursor-ring { display: none; }
-
       .content {
         padding-top: 110px;
       }
@@ -448,7 +506,8 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
       }
 
       .ascii-title-wrap {
-        min-height: 210px;
+        text-align: center;
+        margin-top: 30px;
         margin-bottom: 0;
         overflow: visible;
       }
@@ -457,7 +516,6 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
         font-size: 7px;
         line-height: 0.84em;
         overflow: visible;
-        transform: translateY(40px);
       }
 
       .desc {
@@ -522,9 +580,11 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 </pre>
       </div>
 
-      <div id="quote" style="opacity: 0.14;">не бойся</div>
+      <div id="quote-reveal" class="intro-fade">
+        <div id="quote">не бойся</div>
+      </div>
 
-      <div id="bio">
+      <div id="bio" class="intro-fade">
         <div id="bio-toggle"><span id="bio-caret">&gt;</span> bio</div>
         <div id="bio-body">
           привет, я casual. я люблю писать код и общаться с добрыми людьми.<br>
@@ -676,6 +736,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 
     const cursorDot = document.getElementById('cursor-dot');
     const cursorRing = document.getElementById('cursor-ring');
+    const hoverSel = 'a, button, [role="button"], #bio-toggle';
 
     if (!isTouch) {
       let ringX = window.innerWidth / 2;
@@ -697,6 +758,10 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
         ringY += (targetY - ringY) * 0.35;
         cursorRing.style.left = ringX + 'px';
         cursorRing.style.top = ringY + 'px';
+
+        const el = document.elementFromPoint(targetX, targetY);
+        const onHover = el && el.closest && el.closest(hoverSel);
+        cursorRing.classList.toggle('hover', !!onHover);
 
         requestAnimationFrame(cursorLoop);
       }
@@ -859,6 +924,39 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 
     setTimeout(nextTitle, 2500);
 
+    // ---------- url hash cycling ----------
+    const urlHashNames = ['#НЕ_БОйСяЯЯ..', '#КТО_ТЫ??', '#Я_СХОЖУ_С_УМАААА', '#АААаааАаа', '#AARGH_FUUUUUCK..'];
+    const urlGlitchChars = 'АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзиклмнопрстуфхцчшщъыьэюя?!@*_&$';
+    let urlIndex = 0;
+
+    function setUrlHash(txt) {
+      try {
+        history.replaceState(null, '', window.location.pathname + window.location.search + '#' + txt);
+      } catch (err) {}
+    }
+
+    function glitchUrl() {
+      const target = urlHashNames[urlIndex];
+      let frames = 0;
+      const iv = setInterval(() => {
+        frames++;
+        if (frames >= 8) {
+          clearInterval(iv);
+          setUrlHash(target);
+          urlIndex = (urlIndex + 1) % urlHashNames.length;
+          setTimeout(glitchUrl, 2500);
+        } else {
+          let out = '';
+          for (let i = 0; i < target.length; i++) {
+            out += Math.random() < 0.45 ? urlGlitchChars[Math.floor(Math.random() * urlGlitchChars.length)] : target[i];
+          }
+          setUrlHash(out);
+        }
+      }, 45);
+    }
+
+    glitchUrl();
+
     // ---------- link corruption on hover ----------
     document.querySelectorAll('.corrupt-text').forEach((el) => {
       const link = el.closest('a');
@@ -1008,7 +1106,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
     const asciiTitle = document.getElementById('ascii-title');
     const asciiChars = ' .,:;irsXA253hMHGS#9B&@';
     const asciiCanvas = document.createElement('canvas');
-    const asciiCtx = asciiCanvas.getContext('2d');
+    const asciiCtx = asciiCanvas.getContext('2d', { willReadFrequently: true });
 
     let asciiTime = 0;
     let asciiMouseX = 0;
@@ -1084,12 +1182,94 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
         output += row + '\n';
       }
 
+      const outLines = output.split('\n');
+      while (outLines.length && /^ *$/.test(outLines[outLines.length - 1])) outLines.pop();
+      output = outLines.join('\n');
+
       asciiTitle.textContent = output;
       asciiTime += 0.03;
-      requestAnimationFrame(renderAsciiTitle);
     }
 
-    renderAsciiTitle();
+    let asciiLoopOn = false;
+
+    function asciiLoop() {
+      renderAsciiTitle();
+      if (asciiLoopOn) requestAnimationFrame(asciiLoop);
+    }
+
+    // ---------- INTRO ----------
+    const quoteReveal = document.getElementById('quote-reveal');
+    const bioEl = document.getElementById('bio');
+    const footerLinks = document.querySelector('.footer-links');
+
+    const glitchChars = '▓▒░#%&@*!?0123456789';
+    const setCharAt = (str, idx, ch) => str.slice(0, idx) + ch + str.slice(idx + 1);
+
+    function scrambleRow(row) {
+      let out = '';
+      for (let i = 0; i < row.length; i++) {
+        if (row[i] === ' ') {
+          out += Math.random() < 0.15 ? glitchChars[Math.floor(Math.random() * glitchChars.length)] : ' ';
+        } else {
+          out += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        }
+      }
+      return out;
+    }
+
+    function solveRow(span, finalRow) {
+      const iv = setInterval(() => {
+        let remaining = 0;
+        for (let i = 0; i < finalRow.length; i++) {
+          if (span.textContent[i] !== finalRow[i] && Math.random() < 0.35) {
+            span.textContent = setCharAt(span.textContent, i, finalRow[i]);
+          }
+          if (span.textContent[i] !== finalRow[i]) remaining++;
+        }
+        if (remaining === 0) {
+          clearInterval(iv);
+          span.textContent = finalRow;
+        }
+      }, 24);
+    }
+
+    function startTitleIntro() {
+      renderAsciiTitle();
+      const rows = asciiTitle.textContent.split('\n');
+      asciiTitle.textContent = '';
+      const total = rows.length;
+      const rowStep = 85;
+
+      for (let i = 0; i < total; i++) {
+        const delay = i * rowStep + Math.random() * 45;
+        setTimeout(() => {
+          const span = document.createElement('span');
+          span.className = 'ascii-row';
+          span.textContent = scrambleRow(rows[i]);
+          asciiTitle.appendChild(span);
+          requestAnimationFrame(() => {
+            span.classList.add('on');
+            solveRow(span, rows[i]);
+          });
+        }, delay);
+      }
+
+      setTimeout(() => {
+        asciiTitle.classList.add('sync');
+        asciiLoopOn = true;
+        asciiLoop();
+        revealContent();
+      }, (total - 1) * rowStep + 550);
+    }
+
+    function revealContent() {
+      setTimeout(() => quoteReveal.classList.add('fade-in'), 250);
+      setTimeout(() => bioEl.classList.add('fade-in'), 600);
+      setTimeout(() => footerLinks.classList.add('fade-in'), 950);
+      setTimeout(startQuoteCycle, 1200);
+    }
+
+    startTitleIntro();
 
 </script>
 
